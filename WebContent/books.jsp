@@ -7,8 +7,21 @@
 <title>Books</title>
 </head>
 <body>
-<h1 id="h">Login</h1>
-    
-     
+<h1>Search Result :</h1>
+<jsp:useBean id="book" class="model.Reservation" scope="request"/>
+<p><jsp:getProperty name="book" property="result" /></strong></p>
+<form method="post" action="ResServlet">
+<input type="submit" value="Reserve">
+</form>
+<h3>Search : </h3>
+<form method="get" action="ResServlet">
+<input type="text" name="book">
+<input type="submit" value="Search">
+</form>
+<form method="post" action="AuthServlet">
+<input type="hidden" name="type" value="form2" />
+<input type="submit" value="Logout">
+</form>
+
 </body>
 </html>

@@ -1,11 +1,3 @@
-true les miserables
-false candide
-true germinal
-false le petit prince
-true les fleurs du mal
-false la promesse de l'aube
-true bel ami
-true le rouge et le noir
-true madame bovary
-true le grand meaulnes
-true cyrano de bergerac
+false book1
+true book2
+false book3

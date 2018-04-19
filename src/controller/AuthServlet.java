@@ -40,12 +40,11 @@ public class AuthServlet extends HttpServlet {
 		 
 	    	
 	    	Authentication authentication = new Authentication(request.getParameter("uname"),request.getParameter("pword"));
-	 
-	    	if (authentication.getUsername().equals("aaa")) {
+	    	if (authentication.getUsername().equals("aaa")&&authentication.getPassword().equals("123")) {
 	    		/* Création ou récupération de la session */
 	    		HttpSession session = request.getSession();
-
 	    		session.setAttribute( "user", authentication );
+	    		session.setAttribute( "connected", true );
 	    		RequestDispatcher dispatcher=getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp");
 	    		dispatcher.include(request, response);
 	    	}else {
@@ -58,7 +57,6 @@ public class AuthServlet extends HttpServlet {
 			 session.removeAttribute("user");
 			 if(session != null)
 			     session.invalidate();
-			 
 			 request.getRequestDispatcher("/WEB-INF/goodbye.jsp").forward(request,response);
 			 
 		 }

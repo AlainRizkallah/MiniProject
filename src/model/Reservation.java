@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Reservation {
+public class Reservation{
+	private String path="C:\\Users\\Alain\\eclipse-workspace\\MiniProject\\src\\books.txt";
 	private String book;
 	private String result="";
 	private List<String> books = new ArrayList<String>();
@@ -27,45 +28,40 @@ public class Reservation {
 	public String getResult() {
 		return this.result;
 	}
-	public void setResult(String res) {
-		this.result=res;
+	public void setResult(String result) {
+		this.result=result;
 	}
 	public boolean getIsBooked() {
 		return this.isBooked;
 	}
 	
-	
 	public void book() {
-		int index = this.books.indexOf(this.result);
-		if (index!=-1) {
-			this.isBooked=this.available.get(index);
+		int i = this.books.indexOf(this.result);
+		if (i!=-1) {
+			this.isBooked=this.available.get(i);
 			if (this.isBooked) {
-				this.available.set(index,false);
+				this.available.set(i,false);
 				this.save();
 				this.load();
 			}
 		}
 	}
-
 	public void search() {
 		for (int i =0;i<this.books.size();i++) {
-			String searchMin = this.book.toLowerCase();
-			String bookMin = this.books.get(i).toLowerCase();
-			if (searchMin.equals(bookMin)) {
+			String search = this.book.toLowerCase();
+			String book = this.books.get(i).toLowerCase();
+			if (search.equals(book)) {
 				this.result=this.books.get(i);
 			}
 		}
 	}
 	public void load() {
-		
 		try {
 			this.books = new ArrayList<String>();
 			this.available = new ArrayList<Boolean>();
-			URL url = new URL("C:\\Users\\Alain\\eclipse-workspace\\MiniProject\\src\\books.txt");
-			File books = new File(url.toURI());
-			BufferedReader buffer = new BufferedReader(new FileReader(books));
+			BufferedReader reader = new BufferedReader(new FileReader(path));
 			String line = "";
-			while ((line = buffer.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {
 				
 				String[] words= line.split(" ");
 				if (words[0].equals("true")) {
@@ -73,14 +69,14 @@ public class Reservation {
 				}else {
 					this.available.add(false);
 				}
-				String nBook = "";
+				String B = "";
 				for (int i =0;i<words.length-1;i++) {
 					if (i!=0) {
-						nBook+=" ";
+						B+=" ";
 					}
-					nBook+=words[i+1];
+					B+=words[i+1];
 				}
-				this.books.add(nBook);
+				this.books.add(B);
 			}	
 		} catch (Exception e) {
 			System.out.println("Unable to load file");
@@ -89,10 +85,9 @@ public class Reservation {
 	} 
 	public void save() {
 		try {
-			URL url = new URL("C:\\Users\\Alain\\eclipse-workspace\\MiniProject\\src\\books.txt");
-			File booksa = new File(url.toURI());
-			booksa.delete();
-			BufferedWriter writer = new BufferedWriter(new FileWriter(new File(url.toURI())));	
+			File file = new File(path);
+			file.delete();
+			BufferedWriter writer = new BufferedWriter(new FileWriter(path));	
 			for (int i =0;i<this.books.size();i++) {
 				writer.write(this.available.get(i)+" "+this.books.get(i));
 				writer.newLine();

@@ -18,7 +18,7 @@
   <label>Username:</label>
   <input type="text" name="uname" class="champ" id="c1">
   <label>Pasword:</label>
-  <input type="text" name="pword" class="champ" id="c2">
+  <input type="password" name="pword" class="champ" id="c2">
  
   </fieldset>
  
